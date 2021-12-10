@@ -1,0 +1,2 @@
+with open("day01_data.txt") as data:
+    i = map(int, data.readlines()); print(sum([1 for e in range(1, len(i)) if i[e] > i[e-1]]));print(sum([1 for e in range(3, len(i)) if sum(i[e-2:e+1]) > sum(i[e-3:e])]))

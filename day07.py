@@ -1,0 +1,1 @@
+d = list(map(int, open("day07_data.txt").readline().strip().split(",")));print(min([(lambda pos: sum([abs(c - pos) for c in d]))(i) for i in range(min(d), max(d)+1)]));print(min([(lambda pos: sum([sum(range(1,abs(c - pos)+1)) for c in d]))(i) for i in range(min(d), max(d)+1)]))
