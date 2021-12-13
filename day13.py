@@ -19,16 +19,18 @@ def fold(fold_params):
     global sheet, x_dim, y_dim
     axis = fold_params[0]
     pos = int(fold_params[1])
-    if axis == "x": ftr = lambda c: c[0] > pos
-    if axis == "y": ftr = lambda c: c[1] > pos
+    if axis == "x": 
+        ftr = lambda c: c[0] > pos
+        manipulator = lambda c: (c[0] - 2*(c[0] - pos), c[1])
+        x_dim = pos
+    else: 
+        ftr = lambda c: c[1] > pos
+        manipulator = lambda c: (c[0], c[1] - 2*(c[1] - pos))
+        y_dim = pos
     to_flip = set(filter(ftr, sheet))
-    if axis == "x": manipulator = lambda c: (c[0] - 2*(c[0] - pos), c[1])
-    if axis == "y": manipulator = lambda c: (c[0], c[1] - 2*(c[1] - pos))
     flipped = map(manipulator, to_flip)
     sheet.difference_update(to_flip)
     sheet.update(flipped)
-    if axis == "x": x_dim = pos
-    if axis == "y": y_dim = pos
 
 def print_sheet():
     global sheet, x_dim, y_dim
