@@ -3,12 +3,12 @@ with open("day15_data.txt") as data:
     y_dim = len(d)
     x_dim = len(d[0])
 
-
 def get_neighbors(x, y):
     neightbors = []
     def calc_weight(x, y):
         #return d[y][x]
-        return ((d[y % y_dim][x % x_dim] + x // x_dim + y // y_dim) % 10) + 1
+        distance = (d[y % y_dim][x % x_dim] + x // x_dim + y // y_dim)
+        return distance if distance < 10 else (distance % 10) + 1
     #if x+1 < x_dim: neightbors.append(((x+1,y), calc_weight(x+1, y)))
     if x+1 < x_dim * 5: neightbors.append(((x+1,y), calc_weight(x+1, y)))
     if x > 0: neightbors.append(((x-1,y), calc_weight(x-1, y)))
