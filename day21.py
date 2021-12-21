@@ -39,9 +39,7 @@ p = {
     9: 1
 }
 
-def turn(score1, score2, p1_move):
-    global pos1, pos2
-
+def turn(score1, score2, pos1, pos2, p1_move):
     if score1 >= 21 or score2 >= 21: return int(score1 >= 21), int(score2 >= 21)
 
     wins_local = [0,0]
@@ -50,18 +48,19 @@ def turn(score1, score2, p1_move):
         if p1_move:
             pos1 += d
             pos1 = pos1 % 10 if pos1 != 10 else 10
-            winners = turn(score1 + pos1, score2, not p1_move)
+            winners = turn(score1 + pos1, score2, pos1, pos2, not p1_move)
             wins_local[0] += winners[0] * p[d]
             wins_local[1] += winners[1] * p[d]
         else:
             pos2 += d
             pos2 = pos2 % 10 if pos2 != 10 else 10
-            winners = turn(score1, score2 + pos2, not p1_move)
+            winners = turn(score1, score2 + pos2, pos1, pos2, not p1_move)
             wins_local[0] += winners[0] * p[d]
             wins_local[1] += winners[1] * p[d]
     
     return wins_local
 
-wins = turn(0, 0, True)
+wins = turn(0, 0, pos1, pos2, True)
 print(wins)
+print(max(wins))
 
