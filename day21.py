@@ -46,15 +46,15 @@ def turn(score1, score2, pos1, pos2, p1_move):
 
     for d in p:
         if p1_move:
-            pos1 += d
-            pos1 = pos1 % 10 if pos1 != 10 else 10
-            winners = turn(score1 + pos1, score2, pos1, pos2, not p1_move)
+            pos = pos1 + d
+            pos = pos % 10 if pos != 10 else 10
+            winners = turn(score1 + pos, score2, pos, pos2, not p1_move)
             wins_local[0] += winners[0] * p[d]
             wins_local[1] += winners[1] * p[d]
         else:
-            pos2 += d
-            pos2 = pos2 % 10 if pos2 != 10 else 10
-            winners = turn(score1, score2 + pos2, pos1, pos2, not p1_move)
+            pos = pos2 + d
+            pos = pos % 10 if pos != 10 else 10
+            winners = turn(score1, score2 + pos, pos1, pos, not p1_move)
             wins_local[0] += winners[0] * p[d]
             wins_local[1] += winners[1] * p[d]
     
